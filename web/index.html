@@ -11,9 +11,9 @@
   <style>
     :root{color-scheme:dark;--bg:#05070a;--text:#f2f6fb;--muted:#77808c;--track:#1a222d;--blue:#268cff;--line:rgba(255,255,255,.08)}
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;min-height:100%;background:var(--bg)}body{min-height:100dvh;overflow:hidden;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.screen{position:fixed;inset:0;display:grid;background:var(--bg)}.hidden{display:none!important}
-    #timer{place-items:center;touch-action:none;user-select:none}.x{position:absolute;z-index:3;top:max(14px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:42px;height:42px;border:0;background:transparent;color:#65707d;font-size:30px;font-weight:200;opacity:.72}.clock{width:min(76vw,430px);aspect-ratio:1;position:relative;display:grid;place-items:center;perspective:900px}.clock.turn{animation:turn .34s cubic-bezier(.22,.76,.22,1)}@keyframes turn{0%{transform:rotateY(0);opacity:1}48%{transform:rotateY(62deg) translateX(18px) scale(.96);opacity:.15}52%{transform:rotateY(-62deg) translateX(-18px) scale(.96);opacity:.15}100%{transform:rotateY(0);opacity:1}}
-    svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}circle{fill:none;stroke-width:2.2}.track{stroke:var(--track)}.progress{stroke:var(--blue);stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(38,140,255,.25));transition:stroke-dashoffset .18s linear}.time{position:relative;z-index:2;min-width:6ch;text-align:center;font-variant-numeric:tabular-nums;font-size:clamp(58px,16vw,94px);font-weight:300;letter-spacing:-.055em;line-height:1}
-    #setup{overflow-y:auto;place-items:center;padding:max(32px,env(safe-area-inset-top)) 22px max(32px,env(safe-area-inset-bottom))}.box{width:min(100%,430px)}h1{margin:0 0 8px;font-size:28px;font-weight:500;letter-spacing:-.03em}p{margin:0 0 28px;color:var(--muted);font-size:14px;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:block;border:1px solid var(--line);border-radius:18px;background:#0b0f15;padding:15px 16px 13px}.field>span{display:block;margin-bottom:8px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.row{display:flex;align-items:baseline;gap:7px}.field input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:32px;font-weight:350;font-variant-numeric:tabular-nums;appearance:textfield}.field:focus-within{border-color:rgba(38,140,255,.62);box-shadow:0 0 0 3px rgba(38,140,255,.18)}.unit{color:var(--muted);font-size:13px}.save{width:100%;margin-top:16px;min-height:56px;border:0;border-radius:18px;background:var(--blue);color:white;font-weight:600}.error{min-height:19px;margin:10px 2px 0;color:#ff8f98;font-size:12px}.note{margin:15px 0 0!important;text-align:center;color:#59636f!important;font-size:12px!important}@media(prefers-reduced-motion:reduce){.clock.turn{animation:none}.progress{transition:none}}
+    #timer{place-items:center;touch-action:none;user-select:none}.x{position:absolute;z-index:3;top:max(14px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:42px;height:42px;border:0;background:transparent;color:#65707d;font-size:30px;font-weight:200;opacity:.72}.clock{width:min(76vw,430px);aspect-ratio:1;position:relative;display:grid;place-items:center;perspective:900px;transition:opacity .8s ease,translate 1.2s ease}.clock.turn-right{animation:turnRight .34s cubic-bezier(.22,.76,.22,1)}.clock.turn-left{animation:turnLeft .34s cubic-bezier(.22,.76,.22,1)}@keyframes turnRight{0%{transform:rotateY(0);opacity:1}48%{transform:rotateY(62deg) translateX(18px) scale(.96);opacity:.15}52%{transform:rotateY(-62deg) translateX(-18px) scale(.96);opacity:.15}100%{transform:rotateY(0);opacity:1}}@keyframes turnLeft{0%{transform:rotateY(0);opacity:1}48%{transform:rotateY(-62deg) translateX(-18px) scale(.96);opacity:.15}52%{transform:rotateY(62deg) translateX(18px) scale(.96);opacity:.15}100%{transform:rotateY(0);opacity:1}}#timer.idle .clock{opacity:.68}#timer.paused .clock{opacity:.55}
+    svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}circle{fill:none;stroke-width:2.2}.track{stroke:var(--track)}.progress{stroke:var(--blue);stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(38,140,255,.25));transition:stroke-dashoffset .18s linear}.time{position:relative;z-index:2;min-width:6ch;text-align:center;font-variant-numeric:tabular-nums;font-size:clamp(58px,16vw,94px);font-weight:300;letter-spacing:-.055em;line-height:1}.restart{position:absolute;z-index:3;left:50%;top:66%;translate:-50% -50%;width:52px;height:52px;border:0;background:transparent;color:#7c8794;font-size:31px;font-weight:200;opacity:.72}.restart:active{opacity:1}
+    #setup{overflow-y:auto;place-items:center;padding:max(32px,env(safe-area-inset-top)) 22px max(32px,env(safe-area-inset-bottom))}.box{width:min(100%,430px)}h1{margin:0 0 8px;font-size:28px;font-weight:500;letter-spacing:-.03em}p{margin:0 0 28px;color:var(--muted);font-size:14px;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:block;border:1px solid var(--line);border-radius:18px;background:#0b0f15;padding:15px 16px 13px}.field>span{display:block;margin-bottom:8px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.row{display:flex;align-items:baseline;gap:7px}.field input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:32px;font-weight:350;font-variant-numeric:tabular-nums;appearance:textfield}.field:focus-within{border-color:rgba(38,140,255,.62);box-shadow:0 0 0 3px rgba(38,140,255,.18)}.unit{color:var(--muted);font-size:13px}.save{width:100%;margin-top:16px;min-height:56px;border:0;border-radius:18px;background:var(--blue);color:white;font-weight:600}.error{min-height:19px;margin:10px 2px 0;color:#ff8f98;font-size:12px}.note{margin:15px 0 0!important;text-align:center;color:#59636f!important;font-size:12px!important}@media(prefers-reduced-motion:reduce){.clock.turn-right,.clock.turn-left{animation:none}.progress{transition:none}}
   </style>
 </head>
 <body>
@@ -22,13 +22,14 @@
     <div class="clock" id="clock">
       <svg viewBox="0 0 220 220" aria-hidden="true"><circle class="track" cx="110" cy="110" r="103"></circle><circle class="progress" id="progress" cx="110" cy="110" r="103"></circle></svg>
       <div class="time" id="time">05:00</div>
+      <button class="restart hidden" id="restart" aria-label="Restart current timer">↻</button>
     </div>
   </section>
 
   <section class="screen" id="setup">
     <main class="box">
       <h1>Set your four times</h1>
-      <p>Each right swipe moves to the next time and starts the countdown immediately.</p>
+      <p>Swipe either direction to move between presets. The selected timer starts immediately.</p>
       <div class="grid">
         <label class="field"><span>Preset 1</span><div class="row"><input id="p1" type="number" inputmode="decimal" min="0.1" max="999" step="0.1" value="5"><span class="unit">min</span></div></label>
         <label class="field"><span>Preset 2</span><div class="row"><input id="p2" type="number" inputmode="decimal" min="0.1" max="999" step="0.1" value="15"><span class="unit">min</span></div></label>
@@ -37,33 +38,45 @@
       </div>
       <div class="error" id="error"></div>
       <button class="save" id="save">Start focus</button>
-      <p class="note">You can return here anytime with the × button.</p>
+      <p class="note">Long press the timer to pause or resume.</p>
     </main>
   </section>
 
   <script>
   (()=>{
-    const K='pomorodoCube.presets.v1',S='pomorodoCube.timer.v1',D=[5,15,30,60],R=103,C=2*Math.PI*R,$=id=>document.getElementById(id);
-    const timer=$('timer'),setup=$('setup'),x=$('x'),save=$('save'),clock=$('clock'),ring=$('progress'),display=$('time'),err=$('error'),inputs=[1,2,3,4].map(n=>$('p'+n));
+    const K='pomorodoCube.presets.v1',S='pomorodoCube.timer.v2',D=[5,15,30,60],R=103,C=2*Math.PI*R,$=id=>document.getElementById(id);
+    const timer=$('timer'),setup=$('setup'),x=$('x'),save=$('save'),restart=$('restart'),clock=$('clock'),ring=$('progress'),display=$('time'),err=$('error'),inputs=[1,2,3,4].map(n=>$('p'+n));
     ring.style.strokeDasharray=C;
-    let presets=load(),idx=0,total=presets[0]*60000,endAt=null,running=false,tick=null,sx=0,sy=0,tracking=false,switched=false;
+    let presets=load(),idx=0,total=Math.round(presets[0]*60000),endAt=null,remainingMs=total,running=false,paused=false,finished=false,tick=null,sx=0,sy=0,tracking=false,switched=false,longPress=null,idleTimer=null,burnStep=0;
 
+    const native=window.AndroidTimer||null;
     function valid(v){v=Number(v);return Number.isFinite(v)&&v>=.1&&v<=999}
     function load(){try{const a=JSON.parse(localStorage.getItem(K)||'null');if(Array.isArray(a)&&a.length===4&&a.every(valid))return a}catch(e){}return D.slice()}
     function fmt(ms){const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
-    function remain(){return running&&endAt?Math.max(0,endAt-Date.now()):total}
-    function persist(){try{localStorage.setItem(S,JSON.stringify({activeIndex:idx,totalMs:total,endAt,running}))}catch(e){}}
-    function update(){const r=remain(),q=total?Math.max(0,Math.min(1,r/total)):0;display.textContent=fmt(r);ring.style.strokeDashoffset=C*(1-q);document.title=running?fmt(r)+' · Pomorodo Cube Clock':'Pomorodo Cube Clock';if(running&&r<=0)finish()}
-    function start(i,animate=true){idx=(i+4)%4;total=Math.round(presets[idx]*60000);endAt=Date.now()+total;running=true;clearInterval(tick);tick=setInterval(update,200);persist();if(animate){clock.classList.remove('turn');void clock.offsetWidth;clock.classList.add('turn')}update()}
-    function finish(){running=false;endAt=null;clearInterval(tick);tick=null;persist();update();try{navigator.vibrate?.([180,90,360])}catch(e){}}
-    function edit(){clearInterval(tick);tick=null;running=false;endAt=null;persist();inputs.forEach((v,i)=>v.value=presets[i]);timer.classList.add('hidden');setup.classList.remove('hidden');err.textContent=''}
-    function saveAndStart(){const a=inputs.map(v=>Number(v.value));if(!a.every(valid)){err.textContent='Enter four times between 0.1 and 999 minutes.';return}presets=a;localStorage.setItem(K,JSON.stringify(a));setup.classList.add('hidden');timer.classList.remove('hidden');start(0,false)}
-    function restore(){inputs.forEach((v,i)=>v.value=presets[i]);if(localStorage.getItem(K)==null)return;try{const s=JSON.parse(localStorage.getItem(S)||'null');if(s&&Number.isInteger(s.activeIndex)){idx=Math.max(0,Math.min(3,s.activeIndex));total=Math.round(presets[idx]*60000);endAt=typeof s.endAt==='number'?s.endAt:null;running=!!(s.running&&endAt&&endAt>Date.now());if(!running)endAt=null}}catch(e){}setup.classList.add('hidden');timer.classList.remove('hidden');if(running)tick=setInterval(update,200);update()}
+    function remain(){return running&&endAt?Math.max(0,endAt-Date.now()):remainingMs}
+    function persist(){try{localStorage.setItem(S,JSON.stringify({activeIndex:idx,totalMs:total,endAt,remainingMs:remain(),running,paused,finished}))}catch(e){}}
+    function bridge(method,...args){try{if(native&&typeof native[method]==='function')native[method](...args)}catch(e){}}
+    function wake(on){bridge('setKeepAwake',!!on)}
+    function alarmCancel(){bridge('cancelAlarm')}
+    function alarmSchedule(){if(running&&endAt)bridge('scheduleAlarm',Math.round(endAt))}
+    function haptic(kind=1){bridge('haptic',kind);try{if(!native)navigator.vibrate?.(kind===2?18:10)}catch(e){}}
+    function resetIdle(){timer.classList.remove('idle');clock.style.translate='0px 0px';clearTimeout(idleTimer);if(!setup.classList.contains('hidden')||!running)return;idleTimer=setTimeout(()=>{timer.classList.add('idle');burnShift()},600000)}
+    function burnShift(){if(!timer.classList.contains('idle'))return;const p=[[2,-1],[-2,1],[1,2],[-1,-2]][burnStep++%4];clock.style.translate=p[0]+'px '+p[1]+'px';setTimeout(burnShift,120000)}
+    function update(){const r=remain(),q=total?Math.max(0,Math.min(1,r/total)):0;display.textContent=fmt(r);ring.style.strokeDashoffset=C*(1-q);restart.classList.toggle('hidden',!finished);timer.classList.toggle('paused',paused);document.title=running?fmt(r)+' · Pomorodo Cube Clock':'Pomorodo Cube Clock';if(running&&r<=0)finish()}
+    function animate(dir){clock.classList.remove('turn-right','turn-left');void clock.offsetWidth;clock.classList.add(dir>0?'turn-right':'turn-left')}
+    function start(i,dir=0){idx=(i+4)%4;total=Math.round(presets[idx]*60000);remainingMs=total;endAt=Date.now()+total;running=true;paused=false;finished=false;clearInterval(tick);tick=setInterval(update,200);persist();alarmCancel();alarmSchedule();wake(true);resetIdle();if(dir)animate(dir);update()}
+    function finish(){remainingMs=0;running=false;paused=false;finished=true;endAt=null;clearInterval(tick);tick=null;wake(false);clearTimeout(idleTimer);timer.classList.remove('idle','paused');clock.style.translate='0px 0px';persist();update()}
+    function restartCurrent(){haptic(1);start(idx,0)}
+    function togglePause(){if(finished)return;if(running){remainingMs=remain();running=false;paused=true;endAt=null;clearInterval(tick);tick=null;alarmCancel();wake(false)}else if(paused){endAt=Date.now()+remainingMs;running=true;paused=false;tick=setInterval(update,200);alarmSchedule();wake(true);resetIdle()}haptic(2);persist();update()}
+    function edit(){clearInterval(tick);tick=null;running=false;paused=false;finished=false;endAt=null;alarmCancel();wake(false);persist();inputs.forEach((v,i)=>v.value=presets[i]);timer.classList.add('hidden');setup.classList.remove('hidden');err.textContent=''}
+    function saveAndStart(){const a=inputs.map(v=>Number(v.value));if(!a.every(valid)){err.textContent='Enter four times between 0.1 and 999 minutes.';return}presets=a;localStorage.setItem(K,JSON.stringify(a));setup.classList.add('hidden');timer.classList.remove('hidden');start(0,0)}
+    function restore(){inputs.forEach((v,i)=>v.value=presets[i]);if(localStorage.getItem(K)==null)return;try{const s=JSON.parse(localStorage.getItem(S)||'null');if(s&&Number.isInteger(s.activeIndex)){idx=Math.max(0,Math.min(3,s.activeIndex));total=Math.round(presets[idx]*60000);remainingMs=Number.isFinite(s.remainingMs)?Math.max(0,s.remainingMs):total;endAt=typeof s.endAt==='number'?s.endAt:null;paused=!!s.paused;finished=!!s.finished;if(s.running&&endAt){if(endAt>Date.now()){running=true;remainingMs=endAt-Date.now()}else{running=false;finished=true;remainingMs=0;endAt=null}}}}catch(e){}setup.classList.add('hidden');timer.classList.remove('hidden');if(running){tick=setInterval(update,200);wake(true);alarmSchedule();resetIdle()}else wake(false);update()}
 
-    timer.addEventListener('pointerdown',e=>{if(e.target===x)return;sx=e.clientX;sy=e.clientY;tracking=true;switched=false});
-    timer.addEventListener('pointermove',e=>{if(!tracking||switched)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(dx>54&&Math.abs(dx)>Math.abs(dy)*1.2){switched=true;start(idx+1,true)}});
-    ['pointerup','pointercancel'].forEach(n=>timer.addEventListener(n,()=>{tracking=false;switched=false}));
-    x.addEventListener('click',edit);save.addEventListener('click',saveAndStart);inputs.forEach(v=>v.addEventListener('keydown',e=>{if(e.key==='Enter')saveAndStart()}));clock.addEventListener('animationend',()=>clock.classList.remove('turn'));document.addEventListener('visibilitychange',()=>{if(!document.hidden)update()});window.addEventListener('pagehide',persist);
+    timer.addEventListener('pointerdown',e=>{if(e.target===x||e.target===restart)return;resetIdle();sx=e.clientX;sy=e.clientY;tracking=true;switched=false;clearTimeout(longPress);longPress=setTimeout(()=>{if(tracking&&!switched){tracking=false;togglePause()}},650)});
+    timer.addEventListener('pointermove',e=>{if(!tracking||switched)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)>54&&Math.abs(dx)>Math.abs(dy)*1.2){switched=true;clearTimeout(longPress);haptic(1);start(idx+(dx>0?1:-1),dx>0?1:-1)}});
+    ['pointerup','pointercancel'].forEach(n=>timer.addEventListener(n,()=>{tracking=false;switched=false;clearTimeout(longPress)}));
+    ['pointerdown','touchstart'].forEach(n=>timer.addEventListener(n,resetIdle,{passive:true}));
+    x.addEventListener('click',edit);restart.addEventListener('click',restartCurrent);save.addEventListener('click',saveAndStart);inputs.forEach(v=>v.addEventListener('keydown',e=>{if(e.key==='Enter')saveAndStart()}));clock.addEventListener('animationend',()=>clock.classList.remove('turn-right','turn-left'));document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(running&&endAt&&endAt<=Date.now())finish();else update()}});window.addEventListener('pagehide',persist);
     if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
     restore();
   })();
