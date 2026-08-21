@@ -10,6 +10,8 @@ on:
       - 'build.gradle'
       - 'settings.gradle'
       - '.github/workflows/build-android.yml'
+  pull_request:
+    branches: [main]
 
 jobs:
   apk:
