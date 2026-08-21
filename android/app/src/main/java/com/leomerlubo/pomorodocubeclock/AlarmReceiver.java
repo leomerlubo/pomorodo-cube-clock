@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.VibratorManager;
-import androidx.core.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private static final String CHANNEL_ID = "timer_finished";
@@ -30,25 +29,22 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        if (Build.VERSION.SDK_INT >= 26) {
-            AudioAttributes attributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .build();
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Timer finished", NotificationManager.IMPORTANCE_HIGH);
-            channel.enableVibration(true);
-            channel.setVibrationPattern(new long[]{0, 180, 90, 360});
-            channel.setSound(sound, attributes);
-            manager.createNotificationChannel(channel);
-        }
+        AudioAttributes attributes = new AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_ALARM)
+            .build();
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Timer finished", NotificationManager.IMPORTANCE_HIGH);
+        channel.enableVibration(true);
+        channel.setVibrationPattern(new long[]{0, 180, 90, 360});
+        channel.setSound(sound, attributes);
+        manager.createNotificationChannel(channel);
 
         Intent openIntent = new Intent(context, MainActivity.class);
         openIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        int pendingFlags = PendingIntent.FLAG_UPDATE_CURRENT;
-        if (Build.VERSION.SDK_INT >= 23) pendingFlags |= PendingIntent.FLAG_IMMUTABLE;
+        int pendingFlags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
         PendingIntent contentIntent = PendingIntent.getActivity(context, 3001, openIntent, pendingFlags);
 
         android.app.Notification notification = new android.app.Notification.Builder(context, CHANNEL_ID)
-            .setSmallIcon(com.leomerlubo.pomorodocubeclock.R.drawable.app_icon)
+            .setSmallIcon(R.drawable.app_icon)
             .setContentTitle("Timer finished")
             .setContentText("Your focus timer reached 00:00")
             .setContentIntent(contentIntent)
